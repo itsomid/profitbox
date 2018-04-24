@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->string('authority')->nullable();
             $table->string('payment_details')->default('{}');
-            $table->integer('amount')->default(0);
+            $table->float('amount')->default(0);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('vps_id')->unsigned();
