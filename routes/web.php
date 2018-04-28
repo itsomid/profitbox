@@ -54,6 +54,3 @@ Route::group(['prefix' => 'panel','middleware' => ['auth']], function (){
 
 
 
-Auth::routes();
-
-
