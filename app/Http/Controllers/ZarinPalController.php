@@ -22,8 +22,8 @@ class ZarinPalController extends Controller implements AbstractIPG
         $payment->save();
 //        return ['redirect_url' => 'https://www.zarin/pal.com/pg/StartPay/' . $result['Authority'] . '/ZarinGate'];
         //return "hello";
-        $url = 'https://www.zarinpal.com/pg/StartPay/' . $result['Authority'];
-        //return $url;
+        $url = "https://www.zarinpal.com/pg/StartPay/" . $result['Authority'];
+
         return redirect()->away($url);
     }
 
