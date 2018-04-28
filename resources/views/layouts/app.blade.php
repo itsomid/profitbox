@@ -8,7 +8,7 @@
 @section('breadcrumbs')
 @include('inspinia::layouts.main-panel.breadcrumbs', [
   'breadcrumbs' => [
-    (object) [ 'title' => 'Home', 'url' => route('home') ]
+    (object) [ 'title' => 'Home', 'url' => route('panel') ]
   ]
 ])
 @endsection
@@ -16,7 +16,7 @@
 @section('sidebar-menu')
   <ul class="nav metismenu" id="side-menu" style="padding-left:0px;">
     <li class="active">
-      <a href="{{ route('home') }}"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+      <a href="{{ route('panel') }}"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
     </li>
   </ul>
 @endsection
