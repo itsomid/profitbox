@@ -115,7 +115,7 @@ class PaymentController extends Controller
         }
         $payment->setDetails(['scheme' => 'profit']);
         $payment->save();
-        return redirect($zarin->createRequest($payment));
+        return response()->redirectTo($zarin->createRequest($payment));
 //          $bot_details = $bot->bot_details;
 //            $bot_details['ex_api'] = '123j';
 //            $bot->bot_details = $bot_details;
