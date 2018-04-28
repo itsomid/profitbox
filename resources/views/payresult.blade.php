@@ -14,7 +14,7 @@
             <div class="col-md-2 col-md-offset-5  " style="background-color: #13A87E">
                 @if($payment->status == "successful")
                     <div class="row row-m-t text-center">
-                        <img src="/img/su.png" class="" width="70%" style="margin-top: -115px">
+                        <img src="/img/Su.png" class="" width="70%" style="margin-top: -115px">
                     </div>
                     <div class="row text-center">
                         <span class="text-white">Your transaction completed</span>
