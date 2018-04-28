@@ -114,7 +114,7 @@
             $(".nav li").removeClass("active");//this will remove the active class from
                                                //previously active menu item
             $('#payment').addClass('active');
-            
+
         });
     </script>
 

@@ -232,7 +232,7 @@
                     <div class="col-md-3 col-md-offset-8 col-xl-2 col-xl-offset-9 text-right ">
                     <a href="{{route('panel/addserver')}}" class="btn btn-outline btn-default" style="border:2px solid #0f253c"><i
                                     class="fa fa-arrow-left"></i> Back</a>
-                        <button class="btn btn-primary"><i class="fa fa-dollar"></i>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-dollar"></i>
                             Make A Payment
                         </button>
 
