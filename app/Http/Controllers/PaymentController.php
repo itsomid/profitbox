@@ -90,7 +90,7 @@ class PaymentController extends Controller
             $payment->amount = $toman;
             $payment->setDetails(['scheme' => 'profit']);
             $payment->save();
-            return response()->json($zarin->createRequest($payment), 200);
+            return redirect()->away($zarin->createRequest($payment));
 
         } elseif($request->payment_method == 'bitcoin') {
 
@@ -115,7 +115,8 @@ class PaymentController extends Controller
         }
         $payment->setDetails(['scheme' => 'profit']);
         $payment->save();
-        return response()->json($zarin->createRequest($payment));
+        //return response()->json($zarin->createRequest($payment), 200);
+        abort(404);
 //          $bot_details = $bot->bot_details;
 //            $bot_details['ex_api'] = '123j';
 //            $bot->bot_details = $bot_details;
