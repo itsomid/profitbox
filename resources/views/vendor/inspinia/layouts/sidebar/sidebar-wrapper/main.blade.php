@@ -28,19 +28,20 @@
   </ul>
 
   <ul class="nav metismenu" id="side-menu" style="padding-left:0px;">
-    <li>
-      <a href="{{route('panel')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+    <li id="home" >
+      <a  href="{{route('panel')}} " ><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
     </li>
-    <li>
+    <li id="payment">
       <a href="{{route('panel/payment/history')}}"><i class="fa fa-align-justify"></i> <span class="nav-label">Payments</span> </a>
     </li>
 
-
-
-
-        {{--<li class="active"><a href="empty_page.html">Empty page</a></li>--}}
-
-
   </ul>
+
+  <script>
+      $(document).ready(function () {
+          $(".nav li").removeClass("active");
+              $('#home').addClass('active');
+      });
+  </script>
 @show
 </div>

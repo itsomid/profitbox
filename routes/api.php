@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use app\Payment;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,13 +18,17 @@ Route::post('bitcoin/callback/{payment_id}',function($payment_id, Request $reque
      $confirmations = $request->input('confirmations');
      $value = $request->input('value');
      // VALUE IS IMPORTANT
-    if($value = '0.005' && $confirmations == 2) {
+    if($value = '0.005' && $confirmations >= 2) {
 
-        $payment = \app\Payment::find($payment_id);
-        $payment->status = "successful";
+
+        $payment = Payment::find($payment_id);
+        $details = $payment->details();
+        $details->reference_id = $transaction_hash;
+        $payment->setDetails($details);
         $payment->save();
-    }
+        $payment->setPaid();
 
+    }
 })->name('bitcoin/callback');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

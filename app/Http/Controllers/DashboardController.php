@@ -9,15 +9,43 @@ use app\Vps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Model;
+use DigitalOceanV2\Adapter\BuzzAdapter;
+use DigitalOceanV2\DigitalOceanV2;
 
 
 class DashboardController extends Controller
 {
+    private $digitalocean;
+
+
+    public function __construct()
+    {
+        $adapter = new BuzzAdapter('28ef48b2a85e7db37f2dd299d70aba396e099e5f8a0fd7b927a9f910ea7cd2f6');
+        $this->digitalocean = new DigitalOceanV2($adapter);
+    }
     public function index(Request $request)
     {
 
+        $user = $request->user();
+        $vps = $user->vps()->whereHas('payment')->get();
+        $droplet = $this->digitalocean->droplet();
 
-          $vps = Vps::with('payment')->whereHas('payment')->get();
+
+        foreach ($vps as $vp)
+        {
+
+            if ($vp->status == 'new')
+            {
+                $vp->status = $droplet->getById($vp->droplet_id)->status;
+                $vp->save();
+            }
+
+        }
+
+
+//return $user_drop;
+
+
 
         return view('dashboard',compact('vps'));
 
@@ -73,10 +101,15 @@ class DashboardController extends Controller
 
         $vps = Vps::whereId($request->vps_id)->first();
         if($vps->status == "active"){
-            $vps->status = "disable";
+            $vps->status = "off";
+            $this->digitalocean->droplet()->shutdown($vps->droplet_id);
+
         }
         else{
             $vps->status = "active";
+            $this->digitalocean->droplet()->powerOn($vps->droplet_id);
+
+
         }
         $vps->save();
          return \Redirect::back()->with('message','Operation Successful !');
@@ -91,6 +124,17 @@ class DashboardController extends Controller
         return view('payment_renew', compact('vps'));
 
     }
+
+    public function removeDroplet($vps_id)
+    {
+       $vps = Vps::whereId($vps_id)->first();
+        $this->digitalocean->droplet()->delete($vps->droplet_id);
+        $vps->status = 'disable';
+        $vps->save();
+
+        return \Redirect::back()->with('message','Operation Successful !');
+    }
+
 
 
 

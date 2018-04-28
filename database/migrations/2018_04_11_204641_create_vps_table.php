@@ -15,6 +15,7 @@ class CreateVpsTable extends Migration
     {
         Schema::create('vps', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('droplet_id')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
@@ -23,7 +24,8 @@ class CreateVpsTable extends Migration
             $table->date('expire_date');
             $table->float('monthly_price');
             $table->integer('price')->default(0);
-            $table->enum('status', ['disable', 'active', 'pending'])->default('disable');
+            $table->enum('status', ['off', 'active', 'pending','new','disable'])->default('pending');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

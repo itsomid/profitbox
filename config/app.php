@@ -214,6 +214,7 @@ return [
         'ZarinpalC' => app\Http\Controllers\ZarinPalController::class,
         'DigitalOcean' => GrahamCampbell\DigitalOcean\Facades\DigitalOcean::class,
 
+
     ],
 
 ];

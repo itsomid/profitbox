@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="Atnic">
   <link href="/css/style.css" rel="stylesheet">
-
+  <meta id="token" name="token" content="{{ csrf_token() }}">
   <script src="/js/jquerysession.js"></script>
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/jquery-3.2.1.js"></script>

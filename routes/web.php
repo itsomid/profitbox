@@ -33,9 +33,11 @@ Route::group(['prefix' => 'panel','middleware' => ['auth']], function (){
 
 
     Route::post('/paymentcreate','PaymentController@create')->name('panel/payment/create');
+    Route::get('/remove/{vps_id}','DashboardController@removeDroplet')->name('panel/remove/droplet');
 
     Route::get('/payment/result','PaymentController@result')->name('panel/payment/create/get');
 
+    Route::get('payment/toman/calculate','PaymentController@tomanCalculate')->name('panel/payment/toman');
     Route::group(['prefix' => 'bank'], function() {
 
         Route::group(['prefix' => 'zpal'], function() {

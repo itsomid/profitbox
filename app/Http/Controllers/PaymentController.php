@@ -6,8 +6,14 @@ use app\Payment;
 use app\User;
 use app\Vps;
 use Carbon\Carbon;
+use DigitalOceanV2\Adapter\BuzzAdapter;
+
+use DigitalOceanV2\DigitalOceanV2;
+
+use GrahamCampbell\DigitalOcean\DigitalOceanManager;
+use GrahamCampbell\DigitalOcean\Facades\DigitalOcean;
 use Illuminate\Http\Request;
-use GuzzleHttp\Exception\GuzzleException;
+
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,11 +23,13 @@ class PaymentController extends Controller
     public function report()
     {
 //        return Payment::with(['user','vps'])->get();
+
         return view('payments', ['payments' => Payment::with(['user', 'vps'])->paginate(10)]);
     }
 
     public function create(Request $request)
     {
+
         if (session()->has('monthly_price_renew')){
             session()->forget('monthly_price_renew');
         }
@@ -75,6 +83,7 @@ class PaymentController extends Controller
         $payment->vps_id = $last_order->id;
 
         $payment->type = $request->payment_method;
+
         if ($request->payment_method == 'toman') {
 
             $toman = $this->tomanCalculate($price);
@@ -87,21 +96,23 @@ class PaymentController extends Controller
 
             $btc = $this->bitcoinCalculate($price);
             $payment->amount = $btc;
+            $payment->setDetails(['scheme' => 'profit']);
+            $payment->save();
+
             $client = new Client();
             $api_key = env('BLOCKCHAIN_API_KEY');
             $xPub = env('BLOCKCHAIN_XPUB');
-            $payment->save();
-            //route('panel/payment/create/get')
-            $callback = "http://profitbox.co/callback";
-            $callback = route('bitcoin/callback',['payment_id' => $payment->id]);
 
-            $url = "https://api.blockchain.info/v2/receive?xpub=$xPub&callback=". urlencode($callback)."&key=$api_key";
+
+            $callback = route('bitcoin/callback', ['payment_id' => $payment->id]);
+
+            $url = "https://api.blockchain.info/v2/receive?xpub=$xPub&callback=" . urlencode($callback) . "&key=$api_key";
             $response = $client->get($url);
-            return $response->getBody();
-            return $response = json_decode($response->getBody(), true);
-//            curl "https://api.blockchain.info/v2/receive?xpub=xpub6BoS6diosBruGFATZr8Z22AfdL8XXMu8vozAna1ogkKQDhnAfKe2nAaYC9KPoD1dPyXNkdV9toYZDUcTtHakpQ9pVUFG1vAuVGLshE6WLE4&callback=https%3A%2F%2Fmystore.com%3Finvoice_id%3D058921123&key=ff6ee907-b52a-41c9-87e8-aaf2cddc2e73";
-        }
 
+            $response = json_decode($response->getBody(), true);
+            return view('payresult',compact($response));
+
+        }
         $payment->setDetails(['scheme' => 'profit']);
         $payment->save();
         return response()->json($zarin->createRequest($payment), 200);
@@ -118,7 +129,7 @@ class PaymentController extends Controller
         $vps = Vps::find($vps_id);
         $payment = $vps->allPayment()->first();
 
-        return view("payresult", compact('payment'));
+        return view('payresult', compact('payment'));
     }
 
 
@@ -129,11 +140,12 @@ class PaymentController extends Controller
 
     }
 
-    public function bitcoinCalculate($price)
+    public function bitcoinCalculate( $price)
     {
+
         $bitcoin = $price / 10000;
         return $bitcoin;
-        
+
     }
     public function priceCalculate($monthly_price,$period)
     {

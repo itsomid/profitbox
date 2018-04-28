@@ -45,7 +45,11 @@
                                 <tr class="footable-even" style="display: table-row;">
                                     <td class="footable-visible footable-first-column"><span
                                                 class="footable-toggle"></span>
+                                        @if(property_exists($payment->payment_info,'reference_id'))
                                         {{$payment->payment_info->reference_id}}
+                                            @else
+                                            Not available
+                                            @endif
                                     </td>
                                     <td class="footable-visible">
                                         {{$payment->vps->title}}
@@ -86,6 +90,8 @@
                                     <td class="text-right footable-visible footable-last-column">
                                         @if($payment->status != 'successful')
                                             <button class="btn btn-primary btn-sm"><i class="fa fa-money"></i>  Submit Payment</button>
+                                            @else
+                                            no Action
                                             @endif
                                     </td>
                                 </tr>
@@ -104,7 +110,12 @@
         </div>
     </div>
     <script type="text/javascript">
-
+        $(document).ready(function () {
+            $(".nav li").removeClass("active");//this will remove the active class from
+                                               //previously active menu item
+            $('#payment').addClass('active');
+            
+        });
     </script>
 
 @endsection

@@ -56,8 +56,8 @@ class Payment extends Model
         $this->status = 'successful';
         $this->save();
         /** @var Vps $vps */
-        $vps = $this->vps;
-        $vps->status = 'active';
-        $vps->save();
+//        $vps = $this->vps;
+//        $vps->status = 'pending';
+//        $vps->save();
     }
 }

@@ -42,7 +42,7 @@ return [
 
         'main' => [
             'driver'  => 'guzzlehttp',
-            'token'   => 'your-token',
+            'token'   => '28ef48b2a85e7db37f2dd299d70aba396e099e5f8a0fd7b927a9f910ea7cd2f6',
         ],
 
         'other' => [
