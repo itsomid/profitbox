@@ -13,7 +13,7 @@ use DigitalOceanV2\DigitalOceanV2;
 
 class ZarinPalController extends Controller implements AbstractIPG
 {
-    public $fake = true;
+    public $fake = false;
 
     public function createRequest($payment)
     {
@@ -73,10 +73,8 @@ class ZarinPalController extends Controller implements AbstractIPG
             ///vps
             $adapter = new BuzzAdapter('28ef48b2a85e7db37f2dd299d70aba396e099e5f8a0fd7b927a9f910ea7cd2f6');
             $digitalocean = new DigitalOceanV2($adapter);
-//
             $droplet = $digitalocean->droplet();
             $vps = $payment->vps;
-
             $new_droplet = $droplet->create("bot-" . $vps->id, 'ams3', '2gb', 33060666);
             $vps->status = 'new';
             $vps->droplet_id = $new_droplet->id;
@@ -100,6 +98,14 @@ class ZarinPalController extends Controller implements AbstractIPG
             $payment->setDetails($details);
             $payment->save();
             $payment->setPaid();
+            $adapter = new BuzzAdapter('28ef48b2a85e7db37f2dd299d70aba396e099e5f8a0fd7b927a9f910ea7cd2f6');
+            $digitalocean = new DigitalOceanV2($adapter);
+            $droplet = $digitalocean->droplet();
+            $vps = $payment->vps;
+            $new_droplet = $droplet->create("bot-" . $vps->id, 'ams3', '2gb', 33060666);
+            $vps->status = 'new';
+            $vps->droplet_id = $new_droplet->id;
+            $vps->save();
             return redirect($success);
         }
         return redirect($failed);

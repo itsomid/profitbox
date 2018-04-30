@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.1.3",
         "atnic/laravel-inspinia": "^0.3.5",
+        "charlesassets/laravel-perfectmoney": "^1.0",
         "doctrine/dbal": "^2.7",
         "encore/laravel-admin": "v1.5.7",
         "fideloper/proxy": "^4.0",

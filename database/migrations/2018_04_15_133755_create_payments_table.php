@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('vps_id')->unsigned();
             $table->foreign('vps_id')->references('id')->on('vps')->onDelete('cascade');
-            $table->enum('type', ['bitcoin', 'paypal', 'toman']);
+            $table->enum('type', ['bitcoin', 'paypal', 'toman','pm']);
             $table->enum('status', ['initializing', 'failed', 'pending', 'successful', 'canceled'])->default('initializing');
             $table->softDeletes();
             $table->timestamps();

@@ -161,6 +161,7 @@ return [
         app\Providers\RouteServiceProvider::class,
         Atnic\Inspinia\Providers\AppServiceProvider::class,
         Zarinpal\Laravel\ZarinpalServiceProvider::class,
+        charlesassets\LaravelPerfectMoney\LaravelPerfectMoneyServiceProvider::class,
 
     ],
 
@@ -213,6 +214,7 @@ return [
         'Zarinpal' => Zarinpal\Laravel\Facade\Zarinpal::class,
         'ZarinpalC' => app\Http\Controllers\ZarinPalController::class,
         'DigitalOcean' => GrahamCampbell\DigitalOcean\Facades\DigitalOcean::class,
+        'PerfectMoney' => charlesassets\LaravelPerfectMoney\PerfectMoney::class,
 
 
     ],

@@ -11,19 +11,19 @@
 @endsection
 @section('content')
     <div class="wrapper wrapper-content">
-        <form action="{{route('panel/payment/create')}}" method="POST" id="" class="form-horizontal">
+        <form action="{{route('panel/payment/create')}}" method="POST" id="myForm" class="form-horizontal">
             {{ csrf_field() }}
             <div class="well no-padding border-size-sm" style="border-color: #0f253c">
                 <div class="row row-m-t">
-                    <div class="col-md-1">
-                        <img src="/img/2.png" class="pull-right" width="50%" style="margin-top: -10px;">
+                    <div class="hidden-xs col-sm-2 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-0">
+                        <img src="/img/2.png " class="pull-right" style="margin-top: -10px;">
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-xs-8 col-xs-offset-1 col-sm-10 col-sm-offset-0 col-lg-11 col-lg-offset-0">
                         <h1 class="text-info">Server Details</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1">
+                    <div class="col-xs-10 col-xs-offset-1 ">
                         <div class="table-responsive invoice-table">
                             <table class="table invoice-table">
                                 <thead>
@@ -80,10 +80,10 @@
             </div>
             <div class="well no-padding border-size-sm" style="border-color: #0f253c">
                 <div class="row row-m-t">
-                    <div class="col-md-1">
-                        <img src="/img/3.png" class="pull-right" width="50%" style="margin-top: -10px;">
+                    <div class="hidden-xs col-sm-2 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-0">
+                        <img src="/img/3.png" class="pull-right" style="margin-top: -10px;">
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-xs-8 col-xs-offset-1 col-sm-10 col-sm-offset-0 col-lg-11 col-lg-offset-0">
                         <h1 class="text-info">Length of Term</h1>
                     </div>
                 </div>
@@ -93,8 +93,8 @@
                     </div>
                 </div>
 
-                <div class="row" style="display: flex">
-                    <div class="col-md-2 col-xs-12 col-md-offset-2" style="display: grid ">
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-2 col-md-3 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1" >
                         <div class="well" style="border:2px solid #0f253c">
                             <div class="row text-center">
                                 <div class="inline">
@@ -105,15 +105,16 @@
                                 </label>
                             </div>
                             <div class="row text-center">
-                                <span> A month for your<br>small needs.</span>
+                                <h5 class="text-warning">Small need.</h5>
                             </div>
                             <div class="row text-center">
                                 <h2 style="color: #13A87E"><strong>${{$monthly_price}}/mo</strong></h2>
+                                <span class="h5"><br></span>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-lg-2 col-md-3 col-md-offset-0 col-sm-5 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                         <div class="well" style="border:2px solid #0f253c">
 
                             <div class="row text-center">
@@ -135,7 +136,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-lg-2 col-md-3 col-md-offset-0 col-md-offset-0 col-sm-5  col-sm-offset-1 col-xs-10 col-xs-offset-1">
                         <div class="well" style="border:2px solid #0f253c">
 
 
@@ -158,7 +159,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-2 col-xs-12" >
+                    <div class="col-lg-2 col-md-3 col-md-offset-0 col-sm-5 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                         <div class="well" style="border:2px solid #0f253c">
                             <div class="row text-center">
                                 <div class="inline">
@@ -177,16 +178,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1 hidden-xs">
-                    </div>
                 </div>
             </div>
             <div class="well no-padding border-size-sm" style="border-color: #0f253c">
                 <div class="row row-m-t">
-                    <div class="col-md-1">
-                        <img src="/img/4.png" class="pull-right" width="50%" style="margin-top: -10px;">
+                    <div class="hidden-xs col-sm-2 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-0">
+                        <img src="/img/4.png" class="pull-right"  style="margin-top: -10px;">
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-xs-8 col-xs-offset-1 col-sm-10 col-sm-offset-0 col-lg-11 col-lg-offset-0">
                         <h1 class="text-info">Payment Method</h1>
                     </div>
                 </div>
@@ -197,29 +196,30 @@
                     </div>
                 </div>
                 <div class="row row-m-t">
-                    <div class="col-md-2 col-xs-4 col-md-offset-1">
+                    <div class="col-md-2 col-xs-4 col-sm-3 col-md-offset-1">
+                        <div class="radio radio-inline">
+                            <input type="radio" id="pm_rb" value="pm" name="payment_method" checked>
+                            <label for="pm_rb"><img class="img-sm" src="/img/pm.png"> Perfect Money
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-4 col-sm-3 ">
                         <div class="radio radio-inline">
                             <input type="radio" id="bitcoin_rb" value="bitcoin" name="payment_method" required>
                             <label for="bitcoin_rb"><img class="img-sm" src="/img/bitcoin.png"> Bitcoin
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-2 col-xs-4">
-                        <div class="radio radio-inline">
-                            <input type="radio" id="paypal_rb" value="paypal" name="payment_method">
-                            <label for="paypal_rb"><img class="img-sm" src="/img/paypal.png"> Paypal
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-xs-4">
+
+                    <div class="col-md-2 col-xs-4 col-sm-3 ">
                         <div class="radio radio-inline">
                             <input type="radio" id="toman_rb" value="toman" name="payment_method">
                             <label for="toman_rb"><img class="img-sm" src="/img/iran.png"> Toman IRT
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-4 text-right">
-                        <span>
+                    <div class="col-xs-3 col-xs-offset-7 col-sm-3 col-sm-offset-0 col-md-2 col-md-offset-3۵ف">
+                        <span class="hidden-xs">
                                 Total Due:
                             </span>
                         <h1 class="font-bold" id="price_lb">
@@ -229,8 +229,9 @@
                     <div class="col-md-1"></div>
                 </div>
                 <div class="row row-m-t">
-                    <div class="col-md-3 col-md-offset-8 col-xl-2 col-xl-offset-9 text-right ">
-                    <a href="{{route('panel/addserver')}}" class="btn btn-outline btn-default" style="border:2px solid #0f253c"><i
+                    <div class="col-xs-11 text-right ">
+                        <a href="{{route('panel/addserver')}}" class="btn btn-outline btn-default"
+                           style="border:2px solid #0f253c"><i
                                     class="fa fa-arrow-left"></i> Back</a>
                         <button class="btn btn-primary" type="submit"><i class="fa fa-dollar"></i>
                             Make A Payment
@@ -258,53 +259,77 @@
             var $price;
             var $monthly_price = parseFloat('{{$monthly_price}}');
 
-            $monthly.click(function () {
 
-                $price_lb.text('$' + $monthly_price);
-                $total_lb.text('$' + $monthly_price);
+            $('#myForm input').on('change', function () {
+                var payment_method = $('input[name=payment_method]:checked', '#myForm').val();
+                if (payment_method === 'bitcoin') {
 
-            });
-            $3mo_rb.click(function () {
-                $price = ($monthly_price - 5) * 3;
-                $price_lb.text('$' + $price);
-                $total_lb.text('$' + $price);
+                    if (($monthly).is(':checked')) {
+                        $price_lb.text(0.005 + 'BTC');
+                        $total_lb.text('฿' + 0.005);
+                    }
+                    if (($3mo_rb).is(':checked')) {
+                        $price_lb.text(0.006 + 'BTC');
+                        $total_lb.text('฿' + 0.006);
+                    }
+                    if (($6mo_rb).is(':checked')) {
+                        $price_lb.text(0.007 + 'BTC');
+                        $total_lb.text('฿' + 0.007);
+                    }
+                    if (($year_rb).is(':checked')) {
+                        $price_lb.text(0.008 + 'BTC');
+                        $total_lb.text('฿' + 0.008);
+                    }
+                }
+                if (payment_method === 'toman' || payment_method === 'pm') {
 
-            });
-            $6mo_rb.click(function () {
-                $price = ($monthly_price - 10) * 6;
-                $price_lb.text('$' + $price);
-                $total_lb.text('$' + $price);
 
-            });
-            $year_rb.click(function () {
-                $price = ($monthly_price - 15) * 12;
-                $price_lb.text('$' + $price);
-                $total_lb.text('$' + $price);
-            });
-            $('#bitcoin_rb').click(function () {
-                $price_lb.text(0.005 + 'BTC');
-                $total_lb.text('$' + $price);
+                    if (($monthly).is(':checked')) {
+                        $price_lb.text('$' + $monthly_price);
+                        $total_lb.text('$' + $monthly_price);
+                    }
+
+                    if (($3mo_rb).is(':checked')) {
+                        $price = ($monthly_price - 5) * 3;
+                        $price_lb.text('$' + $price);
+                        $total_lb.text('$' + $price);
+                    }
+
+                    if (($6mo_rb).is(':checked')) {
+                        $price = ($monthly_price - 10) * 6;
+                        $price_lb.text('$' + $price);
+                        $total_lb.text('$' + $price);
+
+                    }
+                    if (($year_rb).is(':checked')) {
+                        $price = ($monthly_price - 15) * 12;
+                        $price_lb.text('$' + $price);
+                        $total_lb.text('$' + $price);
+                    }
+                }
+
+
             });
             {{--$('#paypal_rb').click(function () {--}}
-                {{--$price_lb.text('$' + $price);--}}
+            {{--$price_lb.text('$' + $price);--}}
             {{--});--}}
 
             {{--$('#toman_rb').click(function () {--}}
 
-                {{--$.ajax({--}}
-                    {{--url: "{{route('panel/payment/toman')}}",--}}
-                    {{--type: "GET",--}}
+            {{--$.ajax({--}}
+            {{--url: "{{route('panel/payment/toman')}}",--}}
+            {{--type: "GET",--}}
 
-                    {{--data: {--}}
-                        {{--_token: "{{csrf_token()}}"--}}
-                    {{--},--}}
-                    {{--success:function(data){--}}
-                        {{--$price_lb.text( data + ' IRT')--}}
-                    {{--},error:function(){--}}
-                        {{--console.log('error');--}}
-                    {{--}--}}
-                {{--});--}}
-                {{--// $price_lb.text('$' + )--}}
+            {{--data: {--}}
+            {{--_token: "{{csrf_token()}}"--}}
+            {{--},--}}
+            {{--success:function(data){--}}
+            {{--$price_lb.text( data + ' IRT')--}}
+            {{--},error:function(){--}}
+            {{--console.log('error');--}}
+            {{--}--}}
+            {{--});--}}
+            {{--// $price_lb.text('$' + )--}}
             {{--});--}}
 
         });

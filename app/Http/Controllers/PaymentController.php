@@ -6,6 +6,7 @@ use app\Payment;
 use app\User;
 use app\Vps;
 use Carbon\Carbon;
+use charlesassets\LaravelPerfectMoney\PerfectMoney;
 use DigitalOceanV2\Adapter\BuzzAdapter;
 
 use DigitalOceanV2\DigitalOceanV2;
@@ -81,7 +82,6 @@ class PaymentController extends Controller
 
         $last_order = $request->user()->vps()->orderBy('created_at', 'desc')->first();
         $payment->vps_id = $last_order->id;
-
         $payment->type = $request->payment_method;
 
         if ($request->payment_method == 'toman') {
@@ -93,6 +93,7 @@ class PaymentController extends Controller
             return redirect()->away($zarin->createRequest($payment));
 
         } elseif($request->payment_method == 'bitcoin') {
+
 
             $btc = $this->bitcoinCalculate($price);
             $payment->amount = $btc;
@@ -112,10 +113,19 @@ class PaymentController extends Controller
             $response = json_decode($response->getBody(), true);
             return view('payresult',compact($response));
 
+        } elseif ($request->payment_method == 'pm')
+        {
+
+            $pm = new PerfectMoney;
+            $balance = $pm->getBalance();
+            return $balance;
+            if($balance['status'] == 'success')
+            {
+                return $balance['USD'];
+            }
+            else return 2;
         }
-        $payment->setDetails(['scheme' => 'profit']);
-        $payment->save();
-        //return response()->json($zarin->createRequest($payment), 200);
+
         abort(404);
 //          $bot_details = $bot->bot_details;
 //            $bot_details['ex_api'] = '123j';
