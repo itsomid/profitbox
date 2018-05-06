@@ -37,4 +37,6 @@ class Vps extends Model
     {
         return $this->hasMany('app\Payment');
     }
+
+
 }

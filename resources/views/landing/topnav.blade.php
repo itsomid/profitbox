@@ -1,19 +1,52 @@
-<div class="row border-bottom">
-    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" method="post" action="/">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search" />
-                </div>
-            </form>
-        </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <li>
-                <a href="#">
-                    <i class="fa fa-sign-out"></i> Log out
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+<nav class="navbar navbar-fixed-top transparent navbar-dark bg-dark-gray">
+    <div class="container">
+
+        <!-- Navbar Logo -->
+        <a class="ui-variable-logo navbar-brand" href="index.html" title="Applify - App Landing HTML Template">
+            <!-- Default Logo -->
+            <img class="logo-default" src="website/assets/img/logo/applify-logo-white.png"
+                 alt="Applify - App Landing HTML Template" data-uhd>
+            <!-- Transparent Logo -->
+            <img class="logo-transparent" src="website/assets/img/logo/applify-logo-white.png"
+                 alt="Applify - App Landing HTML Template" data-uhd>
+        </a><!-- .navbar-brand -->
+
+        <!-- Navbar Navigation -->
+        <div class="ui-navigation navbar-center">
+            <ul class="nav navbar-nav">
+                <!-- Nav Item -->
+                <li>
+                    <a href="#" data-scrollto="features">Features</a>
+                </li>
+                <!-- Nav Item -->
+                <li>
+                    <a href="#" data-scrollto="how-it-works">How It Works</a>
+                </li>
+                <!-- Nav Item -->
+                <li>
+                    <a href="#" data-scrollto="integrate">Integrate</a>
+                </li>
+                <!-- Nav Item -->
+                <li>
+                    <a href="#" data-scrollto="pricing">Pricing</a>
+                </li>
+                <!-- Nav Item -->
+                <li>
+                    <a href="page-api-docs.html">API Docs</a>
+                </li>
+                <!-- Nav Item -->
+                <li class="active">
+                    <a href="page-contact.html">Contact</a>
+                </li>
+            </ul><!--.navbar-nav -->
+        </div><!--.ui-navigation -->
+
+        <!-- Navbar Button -->
+        <a href="https://themeforest.net/item/applify-app-landing-page-html/20000720"
+           class="btn btn-sm ui-gradient-peach pull-right">Get Started</a>
+
+        <!-- Navbar Toggle -->
+        <a href="#" class="ui-mobile-nav-toggle pull-right"></a>
+
+    </div><!-- .container -->
+</nav> <!-- nav -->

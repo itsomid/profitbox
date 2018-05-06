@@ -37,9 +37,10 @@ class PaymentController extends Controller
         if (session()->has('renew_period')){
             session()->forget('renew_period');
         }
-        $monthly_price = session()->get('monthly_price');
+         $monthly_price = session()->get('monthly_price');
 
         $price = $this->priceCalculate($monthly_price,$request->period);
+        session()->put('total_price',$price);
 
         $user = $request->user();
         $vps = new Vps();
@@ -115,15 +116,16 @@ class PaymentController extends Controller
 
         } elseif ($request->payment_method == 'pm')
         {
+            $payment->amount = $price;
+            $payment->setDetails(['scheme' => 'profit']);
+            $payment->save();
+            return PerfectMoney::render([
+                'PAYMENT_AMOUNT' => $price,
+                'NOPAYMENT_URL'=>route('bank/pm/result', ['payment_id' => $payment->id]),
+                'PAYMENT_URL'=>route('bank/pm/result', ['payment_id' => $payment->id])
+            ]);
 
-            $pm = new PerfectMoney;
-            $balance = $pm->getBalance();
-            return $balance;
-            if($balance['status'] == 'success')
-            {
-                return $balance['USD'];
-            }
-            else return 2;
+
         }
 
         abort(404);
@@ -198,5 +200,44 @@ class PaymentController extends Controller
         return response()->json($zarin->createRequest($payment), 200);
     }
 
+    public function perfectMoney(Request $request, $payment_id)
+    {
 
+//         return $request->all();
+        if (session()->has('total_price'))
+        {
+            $total_price = session()->get('total_price');
+        }
+
+         if ($request->PAYMENT_BATCH_NUM != 0)
+         {
+            if ($request->PAYMENT_AMOUNT == $total_price ){
+                $payment = Payment::find($payment_id);
+                $details = $payment->details();
+                $details->reference_id = $request->PAYMENT_BATCH_NUM;
+                $payment->setDetails($details);
+                $adapter = new BuzzAdapter('28ef48b2a85e7db37f2dd299d70aba396e099e5f8a0fd7b927a9f910ea7cd2f6');
+                $digitalocean = new DigitalOceanV2($adapter);
+                $droplet = $digitalocean->droplet();
+                $vps = $payment->vps;
+                $new_droplet = $droplet->create("bot-" . $vps->id, 'ams3', '2gb', 33060666);
+                $vps->status = 'new';
+                $vps->droplet_id = $new_droplet->id;
+                $vps->save();
+                $payment->save();
+                $payment->setPaid();
+                return view('payresult', compact('payment'));
+            }
+         }
+         else{
+             $payment = Payment::find($payment_id);
+             $details = $payment->details();
+             $details->reference_id = $request->PAYMENT_BATCH_NUM;
+             $payment->setDetails($details);
+             $payment->save();
+             $payment->setPaid();
+             return view('payresult', compact('payment'));
+         }
+
+    }
 }

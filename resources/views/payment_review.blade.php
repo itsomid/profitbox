@@ -142,7 +142,7 @@
 
                             <div class="row text-center">
                                 <div class="inline">
-                                    <input type="radio" id="6month_rb" value="3" name="period">
+                                    <input type="radio" id="6month_rb" value="6" name="period">
                                 </div>
                                 <label for="6month_rb" class=" inline">
                                     <h2><strong>6 Month</strong></h2>
@@ -218,7 +218,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-xs-3 col-xs-offset-7 col-sm-3 col-sm-offset-0 col-md-2 col-md-offset-3۵ف">
+                    <div class="col-xs-3 col-xs-offset-7 col-sm-3 col-sm-offset-0 col-md-2 col-md-offset-3">
                         <span class="hidden-xs">
                                 Total Due:
                             </span>
