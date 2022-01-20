@@ -197,7 +197,7 @@
                     $ptf_tb.prop('value', '');
                     $price = $price - 5.00;
                     $price_lb.text('$ ' + $price);
-                    $('#ptf_box').css("border", "4px solid white");
+                    $('#ptf_box').css("border", "4px solid b");
                     $ptf_tb.css("border-left", "3px solid white");
 
                 }
